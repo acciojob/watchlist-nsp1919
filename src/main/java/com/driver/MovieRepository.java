@@ -36,21 +36,20 @@ public class MovieRepository {
     }
 
     public void addMovieDirectorPair(String movieName, String directorName) {
-        if (directMoviemap.containsKey(directorName)) {
-            ArrayList temp = directMoviemap.get(directorName);
-            temp.add(movieName);
-            directMoviemap.put(directorName, temp);
-        } else {
-            ArrayList<String> temp = new ArrayList<>();
+        if (movieMap.containsKey(movieName)&& directorMap.containsKey(directorName)) {
+            ArrayList<String> temp=new ArrayList<>();
+            if (directMoviemap.containsKey(directorName)) temp=directMoviemap.get(directorName);
             temp.add(movieName);
             directMoviemap.put(directorName, temp);
         }
-
-
     }
 
     public List<String> getMoviesByDirectorName(String directorName) {
-        return directMoviemap.get(directorName);
+        ArrayList<String>temp=new ArrayList<>();
+        if (directMoviemap.containsKey(directorName)){
+            ArrayList temo=directMoviemap.get(directorName);
+        }
+        return temp;
     }
 
     public List<String> findAllMovies() {
@@ -61,13 +60,34 @@ public class MovieRepository {
     }
 
 
+
+    //we have to remove movies from moviemap and directormovie map
     public void deleteDirectorByName(String directorName) {
-        directMoviemap.remove(directorName);
+        ArrayList<String> temp=new ArrayList<>();
+        if (directMoviemap.containsKey(directorName))
+        {
+            temp=directMoviemap.get(directorName);
+            for (String s:temp){
+                if (movieMap.containsKey((s)))
+                    movieMap.remove(s);
+            }
+            directMoviemap.remove(directorName);
+        }
     }
 
     public void deleteAllDirectors() {
-        for (String s:directMoviemap.keySet()){
-            directMoviemap.remove(s);
+        ArrayList<String> temp=new ArrayList<>();
+        for (String dir:directMoviemap.keySet()){
+            temp=directMoviemap.get(dir);
+            for (String s:temp){
+                if (movieMap.containsKey(s))
+                    movieMap.remove(s);
+            }
+            if (directorMap.containsKey(dir))
+                directorMap.remove(dir);
+            directorMap.remove(dir);
         }
+
+
     }
 }
