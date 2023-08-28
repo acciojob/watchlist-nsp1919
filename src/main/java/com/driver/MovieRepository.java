@@ -38,6 +38,7 @@ public class MovieRepository {
     }
 
     public Director getDirectorByName(String name) {
+
         return directorMap.get(name);
     }
 
@@ -53,7 +54,7 @@ public class MovieRepository {
     public List<String> getMoviesByDirectorName(String directorName) {
         ArrayList<String> temp = new ArrayList<>();
         if (directMoviemap.containsKey(directorName)) {
-            ArrayList temo = directMoviemap.get(directorName);
+            temp = directMoviemap.get(directorName);
         }
         return temp;
     }

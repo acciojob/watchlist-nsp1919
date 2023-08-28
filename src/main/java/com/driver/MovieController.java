@@ -32,7 +32,7 @@ public class MovieController {
         movieService.addDirector(director);
         return new ResponseEntity<>("Director added",HttpStatus.CREATED);
     }
-    @GetMapping("/get-movies-by-director-name/{name}")
+    @GetMapping("/get-director-by-name/{name}")
     public ResponseEntity<Director> getDirectorByName(@PathVariable("name") String name){
         Director d=movieService.getDirectorByName(name);
         return new ResponseEntity<>(d,HttpStatus.FOUND);
