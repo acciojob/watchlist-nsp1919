@@ -16,6 +16,12 @@ public class MovieRepository {
     HashMap<String, Director> directorMap;
     HashMap<String, ArrayList<String>> directMoviemap;
 
+    public MovieRepository() {
+        this.movieMap = new HashMap<>();
+        this.directorMap = new HashMap<>();
+        this.directMoviemap = new HashMap<>();
+    }
+
     public void addMovie(Movie movie) {
         movieMap.put(movie.getName(), movie);
     }
@@ -31,7 +37,6 @@ public class MovieRepository {
     }
 
     public Director getDirectorByName(String name) {
-
         return directorMap.get(name);
     }
 
