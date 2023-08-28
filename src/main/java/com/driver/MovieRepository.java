@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 @Repository
@@ -41,18 +42,18 @@ public class MovieRepository {
     }
 
     public void addMovieDirectorPair(String movieName, String directorName) {
-        if (movieMap.containsKey(movieName)&& directorMap.containsKey(directorName)) {
-            ArrayList<String> temp=new ArrayList<>();
-            if (directMoviemap.containsKey(directorName)) temp=directMoviemap.get(directorName);
+        if (movieMap.containsKey(movieName) && directorMap.containsKey(directorName)) {
+            ArrayList<String> temp = new ArrayList<>();
+            if (directMoviemap.containsKey(directorName)) temp = directMoviemap.get(directorName);
             temp.add(movieName);
             directMoviemap.put(directorName, temp);
         }
     }
 
     public List<String> getMoviesByDirectorName(String directorName) {
-        ArrayList<String>temp=new ArrayList<>();
-        if (directMoviemap.containsKey(directorName)){
-            ArrayList temo=directMoviemap.get(directorName);
+        ArrayList<String> temp = new ArrayList<>();
+        if (directMoviemap.containsKey(directorName)) {
+            ArrayList temo = directMoviemap.get(directorName);
         }
         return temp;
     }
@@ -65,26 +66,29 @@ public class MovieRepository {
     }
 
 
-
     //we have to remove movies from moviemap and directormovie map
     public void deleteDirectorByName(String directorName) {
-        ArrayList<String> temp=new ArrayList<>();
-        if (directMoviemap.containsKey(directorName))
-        {
-            temp=directMoviemap.get(directorName);
-            for (String s:temp){
+        ArrayList<String> temp = new ArrayList<>();
+        if (directMoviemap.containsKey(directorName)) {
+            temp = directMoviemap.get(directorName);
+            for (String s : temp) {
                 if (movieMap.containsKey((s)))
                     movieMap.remove(s);
             }
             directMoviemap.remove(directorName);
         }
+        if (directorMap.containsKey(directorName))
+            directorMap.remove(directorName);
     }
 
+
     public void deleteAllDirectors() {
+        HashSet<String> set=new HashSet<>();
         ArrayList<String> temp=new ArrayList<>();
         for (String dir:directMoviemap.keySet()){
             temp=directMoviemap.get(dir);
             for (String s:temp){
+                set.add(s);
                 if (movieMap.containsKey(s))
                     movieMap.remove(s);
             }
@@ -92,7 +96,5 @@ public class MovieRepository {
                 directorMap.remove(dir);
             directorMap.remove(dir);
         }
-
-
     }
 }
