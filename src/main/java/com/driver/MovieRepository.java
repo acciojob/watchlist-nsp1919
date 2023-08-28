@@ -84,17 +84,18 @@ public class MovieRepository {
 
     public void deleteAllDirectors() {
         HashSet<String> set=new HashSet<>();
-        ArrayList<String> temp=new ArrayList<>();
         for (String dir:directMoviemap.keySet()){
-            temp=directMoviemap.get(dir);
-            for (String s:temp){
-                set.add(s);
-                if (movieMap.containsKey(s))
-                    movieMap.remove(s);
+            for (String mov:directMoviemap.get(dir)){
+                set.add(mov);
             }
             if (directorMap.containsKey(dir))
                 directorMap.remove(dir);
-            directorMap.remove(dir);
+            directMoviemap.remove(dir);
+        }
+        for (String mov:set){
+            if (movieMap.containsKey(mov))
+                movieMap.remove(mov);
         }
     }
+
 }
