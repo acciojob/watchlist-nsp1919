@@ -65,7 +65,6 @@ public class MovieRepository {
         directMoviemap.remove(directorName);
     }
 
-
     public void deleteAllDirectors() {
         for (String s:directMoviemap.keySet()){
             directMoviemap.remove(s);

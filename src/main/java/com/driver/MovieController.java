@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/movies")
+@RequestMapping("movies")
 public class MovieController {
 
     @Autowired
@@ -20,19 +20,19 @@ public class MovieController {
         return new ResponseEntity<>("New movie added", HttpStatus.CREATED);
     }
 
-    @GetMapping("get-movie-by-name/{name}")
+    @GetMapping("/get-movie-by-name/{name}")
     public ResponseEntity<Movie> getMovieByName(@PathVariable("name") String name){
         Movie m=movieService.getMovieByName(name);
         return new ResponseEntity<>(m,HttpStatus.FOUND);
     }
 
 
-    @PostMapping("add-director")
+    @PostMapping("/add-director")
     public ResponseEntity<String> addDirector(@RequestBody Director director){
         movieService.addDirector(director);
         return new ResponseEntity<>("Director added",HttpStatus.CREATED);
     }
-    @GetMapping("get-movies-by-director-name/{name}")
+    @GetMapping("/get-movies-by-director-name/{name}")
     public ResponseEntity<Director> getDirectorByName(@PathVariable("name") String name){
         Director d=movieService.getDirectorByName(name);
         return new ResponseEntity<>(d,HttpStatus.FOUND);
