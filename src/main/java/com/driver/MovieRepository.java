@@ -13,23 +13,23 @@ import java.util.List;
 @Repository
 public class MovieRepository {
 
-    HashMap<String, Movie> movieMap;
+    HashMap<String, Movie> mMap;
     HashMap<String, Director> directorMap;
     HashMap<String, ArrayList<String>> directMoviemap;
 
     public MovieRepository() {
-        this.movieMap = new HashMap<>();
+        this.mMap = new HashMap<>();
         this.directorMap = new HashMap<>();
         this.directMoviemap = new HashMap<>();
     }
 
     public void addMovie(Movie movie) {
-        movieMap.put(movie.getName(), movie);
+        mMap.put(movie.getName(), movie);
     }
 
     public Movie getMovieByName(String name) {
 
-        return movieMap.get(name);
+        return mMap.get(name);
     }
 
     public void addDirector(Director director) {
@@ -43,7 +43,7 @@ public class MovieRepository {
     }
 
     public void addMovieDirectorPair(String movieName, String directorName) {
-        if (movieMap.containsKey(movieName) && directorMap.containsKey(directorName)) {
+        if (mMap.containsKey(movieName) && directorMap.containsKey(directorName)) {
             ArrayList<String> temp = new ArrayList<>();
             if (directMoviemap.containsKey(directorName)) temp = directMoviemap.get(directorName);
             temp.add(movieName);
@@ -61,7 +61,7 @@ public class MovieRepository {
 
     public List<String> findAllMovies() {
         List<String> temp = new ArrayList<>();
-        for (String s : movieMap.keySet())
+        for (String s : mMap.keySet())
             temp.add(s);
         return temp;
     }
@@ -73,8 +73,8 @@ public class MovieRepository {
         if (directMoviemap.containsKey(directorName)) {
             temp = directMoviemap.get(directorName);
             for (String s : temp) {
-                if (movieMap.containsKey((s)))
-                    movieMap.remove(s);
+                if (mMap.containsKey((s)))
+                    mMap.remove(s);
             }
             directMoviemap.remove(directorName);
         }
@@ -94,8 +94,8 @@ public class MovieRepository {
             directMoviemap.remove(dir);
         }
         for (String mov:set){
-            if (movieMap.containsKey(mov))
-                movieMap.remove(mov);
+            if (mMap.containsKey(mov))
+                mMap.remove(mov);
         }
     }
 
